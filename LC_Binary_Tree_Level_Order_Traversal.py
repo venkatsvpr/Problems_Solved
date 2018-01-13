@@ -4,7 +4,10 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
+"""
+Visit Level by level. Store the current nodes visited in the answers.
+Then navigate the next child level
+"""
 class Solution:
     def levelOrder(self, root):
         Ans = []
