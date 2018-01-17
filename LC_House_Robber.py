@@ -1,5 +1,11 @@
 """
 House Robber
+
+Logic: 
+If there is one house. the profit is robbing the house
+If there are two houses the profit is robbing the max of the two houses
+If there are 3 houses.. the profit is max(profit robbing 2nd house and , profit robbing 1st house + 3rd house)
+profit of robbing n houses.. max(profitof robbing(n-1)and before that , profit of robbing (n)  and n
 """
 class Solution(object):
     def rob(self, nums):
