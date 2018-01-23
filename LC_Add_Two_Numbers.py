@@ -4,6 +4,7 @@
 #         self.val = x
 #         self.next = None
 """
+https://leetcode.com/problems/add-two-numbers-ii/description/
 Loop through the elements of the linked list. push it to a stack.
 pop it out and read it and store it in a list
 """
