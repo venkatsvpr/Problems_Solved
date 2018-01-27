@@ -45,6 +45,8 @@ class Solution(object):
             elif (target < nums[mid]):
                 mod_search (start,mid-1,nums,target)
         
+        Start = -1
+        End = -1
         if (len(nums)>0):
             mod_search (0,len(nums)-1,nums,target)
             if (End == -1):
