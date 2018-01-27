@@ -17,7 +17,7 @@ class Solution(object):
         current_nodes = []
         
         if root is None:
-            return
+            return current_nodes
         Answer = []
         current_nodes.append(root)
         while (current_nodes):
