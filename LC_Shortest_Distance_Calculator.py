@@ -19,6 +19,7 @@ class Solution(object):
         :type C: str
         :rtype: List[int]
         """
+        present_items = []
         for i,ch in enumerate(S):
             if (ch == C):
                 present_items.append(i)
