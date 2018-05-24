@@ -24,7 +24,6 @@ class Solution(object):
                 
             if (p[i-1] == "*"):
                 Matrix[0][i] = Matrix[0][i-2];
-                Matrix[0][i-1] = Matrix[0][i-2];
         
         """ Run a loop for the len(s) and len(p) and fill the table """
         for i in range(0,len(s)+1):
