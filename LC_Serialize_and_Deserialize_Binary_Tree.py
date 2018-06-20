@@ -38,6 +38,10 @@ class Codec:
         :type root: TreeNode
         :rtype: str
         """
+        1
+        2 3
+          4 5
+
         def rec(node):
             if (node == None):
                 lt.append("#")
