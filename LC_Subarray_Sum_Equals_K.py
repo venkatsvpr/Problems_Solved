@@ -15,6 +15,12 @@ class Solution(object):
         :type nums: List[int]
         :type k: int
         :rtype: int
+
+        Approach:
+        =========
+        1) We attempt it by the running sum
+        2) at evey element have a dict for the running sum.. if running sum is already present increment the count. else insert with count 1
+        3) at every step check if runningsum-k is there on the dict.. if it is there add the number of times it is present to the count.
         """
         running = dict()
         rsum = 0
@@ -28,6 +34,7 @@ class Solution(object):
                 running[rsum] += 1
             else:
                 running[rsum] = 1
+        print (running)
         return count
 
 mysol = Solution()
