@@ -52,7 +52,7 @@ class Solution:
 
     for this, we will have to consider
     """
-    def maxA(self, N):
+    def maxA    (self, N):
         # write your code here
         dp = [0 for i in range(N+1)]
         for i in range(1,7):
@@ -62,4 +62,3 @@ class Solution:
             for bp in range(N-3,0,-1):
                 dp[i] = max(dp[i], dp[bp]*(i-bp-1))
         return dp[N]
-        
