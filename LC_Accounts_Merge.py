@@ -96,4 +96,4 @@ class Solution:
                 AList.append([Node.name ]+ sorted(Node.email))
         return AList
 
-                    
+                        
