@@ -1,13 +1,20 @@
 """
-560. Subarray Sum Equals K
-Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose sum equals to k.
+Interesting one.
 
-Example 1:
-Input:nums = [1,1,1], k = 2
-Output: 2
-Note:
-The length of the array is in range [1, 20,000].
-The range of numbers in the array is [-1000, 1000] and the range of the integer k is [-1e7, 1e7].
+Create a dictionary to the store the running sum .. with the frequency.
+At every point if (runningsum-k) is there on the dictionary.. that means.. difference between current running sum and older running sum is k.
+means.. sum of elemments form the end of that array to this array is k.. which is what we want...
+add the frequency of that subarry to the Answer.
+
+A less efficent way would be to store the running sum in a array. for every new running sum... loop through all the old elements and keep track how many elements have a difference of k
+
+
+
+Approach:
+=========
+1) We attempt it by the running sum
+2) at evey element have a dict for the running sum.. if running sum is already present increment the count. else insert with count 1
+3) at every step check if runningsum-k is there on the dict.. if it is there add the number of times it is present to the count.
 """
 class Solution(object):
     def subarraySum(self, nums, k):
@@ -15,12 +22,6 @@ class Solution(object):
         :type nums: List[int]
         :type k: int
         :rtype: int
-
-        Approach:
-        =========
-        1) We attempt it by the running sum
-        2) at evey element have a dict for the running sum.. if running sum is already present increment the count. else insert with count 1
-        3) at every step check if runningsum-k is there on the dict.. if it is there add the number of times it is present to the count.
         """
         running = dict()
         rsum = 0
@@ -36,6 +37,3 @@ class Solution(object):
                 running[rsum] = 1
         print (running)
         return count
-
-mysol = Solution()
-print (mysol.subarrySum([1,1,1],2))
