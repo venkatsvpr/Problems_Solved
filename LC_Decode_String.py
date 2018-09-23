@@ -17,9 +17,15 @@ s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
 """
 
 """
-When we see a [ or any character. push it to stack
-If we see "]" pop everything till "[" and repeat the chracters seen for the number just seen before that.
-push the answer back to stack and keep doing the same things.
+This is a nice logic.
+First insert ["",1] into the stack.
+When we see a num.. keep track of the num
+when we see a [, insert ["", int(num)] into the stack
+then whtaver character we see.. add it inot that element.. stack[-1][0] +=ch
+when we see a ], pop the element out.. and repeat it by the size and store it in the last element on stack.
+keep doing it..
+ultimately the answer will be there on the first element of the stack.
+
 """
 class Solution(object):
     def decodeString(self, s):
@@ -27,19 +33,19 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        Ans = ""
-        stack = []
+        Stack = []
+        Stack.append(["",1])
+        Num = ""
         for ch in s:
-            if (ch != "]"):
-                stack.append(ch)
+            print (ch,Stack)
+            if (ch.isdigit()):
+                Num += ch
+            elif (ch == "["):
+                Stack.append(["",int(Num)])
+                Num = ""
+            elif (ch == "]"):
+                St,size = Stack.pop()
+                Stack[-1][0] += St*size
             else:
-                St = ""
-                while (stack[-1] != "["):
-                    St = stack.pop() + St
-                stack.pop()
-                Num = stack.pop()
-                #print (St*int(Num),stack)
-                stack.append(St*int(Num))
-        return "".join(stack)
-
-                
+                Stack[-1][0] += ch
+        return Stack[0][0]
