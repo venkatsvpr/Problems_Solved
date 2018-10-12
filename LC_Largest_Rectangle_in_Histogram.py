@@ -18,6 +18,13 @@ Example:
 Input: [2,1,5,6,2,3]
 Output: 10
 
+
+Have a stack to track the history of positions, first the stack is empty
+Add a  0 to the height for easy processing.
+Keep track of positions in the increasing order of height... go through heights one by one.. if we get a low height..
+pop all the big ones out of the stack. calculate the area at every point in time... if it is greater than max area store it
+At the end we will have the answer in max.
+
 """
 class Solution(object):
     def largestRectangleArea(self, heights):
@@ -25,19 +32,17 @@ class Solution(object):
         :type heights: List[int]
         :rtype: int
         """
-        # Add a marker to the heights array to denote that it is ended
         heights.append(0)
-        # populate the stack with -1
-        stack = [-1]
+        stack = []
         ans = 0
         for i in range(len(heights)):
-            # pop all the element's index from stack whose height is greather than the ith height.
-            # find area in all the cases.
-            while(heights[i] < heights[stack[-1]]):
+            while (len(stack)) and (heights[i] < heights[stack[-1]]):
                 height = heights[stack.pop()]
-                width = i - stack[-1] - 1
+                if (len(stack) == 0):
+                    width = i
+                else:
+                    width = i - stack[-1] - 1
                 ans = max(ans, height*width)
-            # append the index to the stack.
             stack.append(i)
         heights.pop(0)
         return ans
