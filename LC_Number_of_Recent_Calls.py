@@ -24,7 +24,7 @@ Each test case will call ping with strictly increasing values of t.
 Each call to ping will have 1 <= t <= 10^9.
 
 We only need the recent items.. so use queue.
-for pings.. add it to the end of the queue.
+for pings.. add it tod the end of the queue.
 for elements which are at the start of the queue.. which is less than t-3000 popleft
 """
 import collections
