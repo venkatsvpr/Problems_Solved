@@ -63,4 +63,4 @@ class Solution(object):
             if (breakFlag == True):
                 AnsCount += 1
             currIndex -= 1
-        return AnsCounts
+        return AnsCount
