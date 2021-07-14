@@ -77,6 +77,12 @@ func sumGame(num string) bool {
 	// Just handle the more Q on left side.
 	if diffQ > 0 {
 		if diffQ == 1 {
+			// If there is one shot, Alice wins
+			return true
+		}
+
+		// Bob plays to win
+		if firstHalf+(9*int(diffQ/2)) != secondHalf {
 			return true
 		}
 
@@ -86,11 +92,6 @@ func sumGame(num string) bool {
 			return true
 		}
 
-		// Bob plays to win
-		diffQ--
-		if firstHalf+(9*int(diffQ/2)) != secondHalf {
-			return true
-		}
 		return false
 	}
 
@@ -98,6 +99,12 @@ func sumGame(num string) bool {
 	if diffQ < 0 {
 		diffQ := rnumQ - lnumQ
 		if diffQ == 1 {
+			// If there is one shot, Alice wins
+			return true
+		}
+
+		// Bob plays to win
+		if secondHalf+9*int(diffQ/2) != firstHalf {
 			return true
 		}
 
@@ -107,11 +114,6 @@ func sumGame(num string) bool {
 			return true
 		}
 
-		// Bob plays to win
-		diffQ--
-		if secondHalf+9*int(diffQ/2) != firstHalf {
-			return true
-		}
 		return false
 	}
 
