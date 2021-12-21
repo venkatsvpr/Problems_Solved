@@ -35,7 +35,7 @@ class Solution(object):
         :rtype: int
         """
         def rec(nums, start, end, target):
-            mid = (start + end) / 2
+            mid = start + (end - start)/2
             if start > end or end < start:
                 return -1
             if nums[mid] == target:
