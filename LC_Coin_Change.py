@@ -59,3 +59,32 @@ class Solution(object):
         if (retval == float('inf')):
             return -1
         return retval
+
+
+
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        cache = dict()
+        # Recursive logic with memoisation
+        def change(val):
+            if val in cache:
+                return cache[val]
+            minChange = float('inf')
+            for cn in coins:
+                if cn > val:
+                    continue
+                if cn == val:
+                    return 1
+                minChange = min(minChange, 1+ change(val-cn))
+            cache[val] = minChange
+            return minChange
+        cache[0] = 0
+        for cn in coins:
+            cache[cn] = 1
+        ans = change(amount)
+        if float('inf') == ans:
+            return -1
+        return ans
+            
+                
+            

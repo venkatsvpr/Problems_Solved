@@ -51,3 +51,39 @@ class Solution(object):
             return False
         
         return hasSubset(sum(nums)/2)
+
+
+
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        t = dict()
+        def canDoSubset(nums, req):
+            # base conditions
+            if req == 0:
+                return True
+            if len(nums) == 0:
+                return False            
+            
+            if (len(nums), req) in t:
+                return t[(len(nums), req)]
+            
+            # If the number if soo big, cant include them
+            if (nums[0] > req):
+                t[(len(nums), req)] = canDoSubset(nums[1:], req)
+                return t[(len(nums), req)]
+            
+            # Take best of taking the first number or not taking.
+            t[(len(nums), req)] = canDoSubset(nums[1:], req-nums[0]) or canDoSubset(nums[1:], req)        
+            
+            return t[(len(nums), req)]
+        reqSubsetSum = sum(nums)
+        
+        # can be partiotioned only if it is even
+        if reqSubsetSum % 2 != 0:
+            return False
+        
+        # We want a subset, The rest would be another equal subset
+        reqSubsetSum = int(reqSubsetSum / 2)
+        return canDoSubset(nums, reqSubsetSum)
+            
+        

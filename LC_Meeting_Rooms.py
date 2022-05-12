@@ -45,3 +45,19 @@ class Solution:
             return False
         return True
         
+
+
+class Solution:
+    def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
+        # Sort by starting time
+        intervals.sort(key= lambda v:v[0])
+        for idx, val in enumerate(intervals):
+            if idx == len(intervals)-1:
+                continue
+            # If the end in current greater than start of next
+            if val[1] > intervals[idx+1][0]:
+                return False
+        return True
+                
+            
+        

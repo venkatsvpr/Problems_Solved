@@ -32,3 +32,30 @@ class Solution(object):
                     maxIter = max (maxIter, dp[j])
             dp[i] = maxIter + 1
         return max(dp)
+
+
+# Keep a stack of increasing number of items
+# if we get a new number which is big.. add ot hte stack
+# If the number is small or equal. find the position in the stack and swap it out.
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        ans = 0
+        if len(nums) == 0:
+            return ans
+        stack = [ nums[0] ]
+        ans = 1
+        for idx in range(1,len(nums)):
+            if stack[-1] < nums[idx]:
+                stack.append(nums[idx])
+            else:
+                idx2 = 0 
+                ## do binary search here
+                while idx2 < len(stack) and stack[idx2] < nums[idx]:
+                    idx2 += 1
+                stack[idx2] = nums[idx]
+            ans = max(ans,len(stack))
+        return ans
+                
+            
+            
+            

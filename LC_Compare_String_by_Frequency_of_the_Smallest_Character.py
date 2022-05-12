@@ -27,31 +27,25 @@ Constraints:
 queries[i][j], words[i][j] are English lowercase letters.
 """
 
-from collections import defaultdict
-import queue as Q
-class Solution:
-    def numSmallerByFrequency(self, queries: List[str], words: List[str]) -> List[int]:
-        def f(s):
-            pq = Q.PriorityQueue()
-            fq = defaultdict(int)
-            for ch in s:
-                fq[ch] += 1
-            for ch in fq:
-                pq.put((ch, fq[ch]))
-            (ch,frequency) = pq.get()
-            return frequency
-        ltQuery = []
-        for query in queries:
-            ltQuery.append(f(query))
-        ltWord = []
-        for word in words:
-            ltWord.append(f(word))
-        Ans = []
-        for x in ltQuery:
-            count = 0
-            for y in ltWord:
-                if (x < y):
-                    count += 1
-            Ans.append(count)
-        return Ans
+class Solution(object):
+    def isPossibleDivide(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: bool
+        """
+        cc = Counter(nums)
+        keys = [v for v in cc]
+        keys.sort()
+        
+        idx = 0
+        while idx < len(keys):
+            start = keys[idx]
+            for num in range(start, start+k):
+                if cc[num] <= 0:
+                    return False
+                cc[num] -= 1
             
+            while idx < len(keys) and cc[keys[idx]] == 0:
+                idx += 1
+        return True

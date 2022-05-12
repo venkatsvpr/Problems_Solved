@@ -34,3 +34,18 @@ class Solution(object):
         if (len(nums) == 1):
             return nums[0]
         return max(bestrob(nums[1:]), bestrob(nums[:-1]))
+
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        def houseRob(nums: List[int]) -> int:
+        # at every level we have two options
+        # with - current best + previous without best
+        # without  - max(prev with best, prev without best)
+        # final answer is max of both
+            w = wo = 0
+            for num in reversed(nums):
+                w, wo = num + wo, max(w,wo)
+            return max(w,wo)
+        if len(nums) == 1:
+            return nums[0]
+        return max(houseRob(nums[1:]), houseRob(nums[:-1]))

@@ -65,3 +65,23 @@ class Solution(object):
             best_up = max(root.val ,root.val + max(left_up,right_up))
             return [best_below, best_terminate, best_up]
         return (max(rec_call(root)))
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        def rec(node):
+            if node == None:
+                return float('-inf'), float('-inf')
+            left, leftBest =  rec(node.left)
+            right, rightBest = rec(node.right)
+            # path going up, can be from left/right or current node
+            # path ends at this node can  be leftBest, rightBight (or) can have left, left+right, right, or just node
+            return max(left,right,0)+ node.val, max(leftBest, rightBest, max(left+right, left, right, 0 ) +node.val)
+        tempAns, nodeBest = rec(root)
+        return max(nodeBest,tempAns)
