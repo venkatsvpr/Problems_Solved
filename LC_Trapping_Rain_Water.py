@@ -55,3 +55,27 @@ class Solution(object):
         # reverse the heights and do the same
         ans += calculate(reversed(height), False)
         return ans
+
+
+class Solution(object):
+    def trap(self, height):
+        # Find the max to the left
+        max_left = [height[0]]
+        for idx in range(1,len(height)):
+            max_left.append(max(height[idx], max_left[-1]))
+        
+        # Find the max to the right
+        max_right = [0 for i in range(len(height))]
+        max_right[len(height)-1] = height[-1]
+        for idx in range(len(height)-2,-1,-1):
+            max_right[idx] = max(max_right[idx+1], height[idx])
+
+        # Find the level, which would be min of the two maxes
+        level = [min(max_left[idx], max_right[idx]) for idx in range(len(height))]
+        
+        # Find the water held, which would be level - height
+        water = [level[idx] - height[idx] for idx in range(len(height))]
+        return sum(water)
+        
+        
+        

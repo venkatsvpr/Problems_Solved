@@ -46,23 +46,32 @@ class Solution(object):
         :type dislikes: List[List[int]]
         :rtype: bool
         """
+        # perform dfs
         def dfs (node, color,graph, c):
-            #print (" dfs in node",node)
+            # If we have already seen the node, check if it is colored properly
             if (node in color):
                 if (color[node] != c):
                     return False
                 else:
                     return True
+            
+            # color the node if we have not seen it
             color[node] = c
-            return all (dfs(next,color,graph,not c) for next in graph[node])
-
+            
+            allTrue = True
+            for nxt in graph[node]:
+                if False == dfs(nxt, color, graph , not c):
+                    allTrue = False
+            return allTrue
+        
+        ## Construct the adjaceny map
         graph = collections.defaultdict(list)
         for [u,v] in dislikes:
             graph[u].append(v)
             graph[v].append(u)
-        #print (graph)
-
-        color = dict()
+        
+        ## colors
+        color = dict() 
         for i in range(1,N+1):
             if (i not in color):
                 if (False == dfs(i,color,graph,True)):

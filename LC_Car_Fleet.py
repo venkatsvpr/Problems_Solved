@@ -80,3 +80,18 @@ class Solution(object):
             #print ("incrementing")
             Count += 1
         return Count;
+
+
+class Solution:
+    def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
+        pairs  = [[p,s] for p,s in zip(position,speed)]
+        stack = []
+        
+        # Sort by reverse order of points, and see if the times overlap
+        for p,s  in sorted(pairs)[::-1]:
+            # If time doesnt overlap add the point to the stack, else drop the point since it will merge with whatever is in the stack.
+            expectedTime = ((target - p)/ s)
+            if len(stack) == 0 or stack[-1] < expectedTime:
+                stack.append(expectedTime)
+        return len(stack)
+            

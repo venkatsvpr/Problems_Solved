@@ -45,28 +45,30 @@ else.. keep counting the counts.. and pop Out
 
 class StockSpanner:
 
-def __init__(self):
-  self.list =  []
-def next(self, price):
-  """
-  :type price: int
-  :rtype: int
-  """
-  count = 1
-  if (len(self.list) == 0):
-      self.list.append([price, count])
-      return count
-  else:
-      [lp, lc] = self.list[-1]
-      if (price < lp):
-          self.list.append([price,count])
-          return count
-      else:
-          while (len(self.list) > 0) and (self.list[-1] [0] <= price):
-              [lp , lc] = self.list.pop()
-              count += lc
-          self.list.append([price, count])
-          return count
+    def __init__(self):
+        self.list =  []
+    def next(self, price):
+        """
+        :type price: int
+        :rtype: int
+        """
+        count = 1
+        # Keep track of the price and num displaced
+        if (len(self.list) == 0):
+            self.list.append([price, count])
+            return count
+        else:
+            [lp, lc] = self.list[-1]
+            if (price < lp):
+                self.list.append([price,count])
+                return count
+            else:
+                # If we get a bigger number, It will displace all the smaller numbers from the top of the stack and take the count on the sum.
+                while (len(self.list) > 0) and (self.list[-1] [0] <= price):
+                    [lp , lc] = self.list.pop()
+                    count += lc
+                self.list.append([price, count])
+                return count
 
 # Your StockSpanner object will be instantiated and called as such:
 # obj = StockSpanner()

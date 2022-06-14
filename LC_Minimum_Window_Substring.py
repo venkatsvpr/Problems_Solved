@@ -46,20 +46,27 @@ s and t consist of uppercase and lowercase English letters.
 """
 class Solution:
     def minWindow(self, s, t):
+        # keep track of what we need
         need = collections.Counter(t)
+        # We are missing these many characters
         missing = len(t)
         start = end = 0;
         minstart = minend  = float('-inf')
         for end,ch in enumerate(s):
+            # If we come across somethig we need, reduce missing
             if (need[ch] > 0):
                 missing -= 1
             need[ch] -= 1
+
+            # We have not satisfied the condition of match. keep continuing
             if (missing > 0):
                 continue
+            
             # Skip Extra Characters which are from the start
             while (start<=end and need[s[start]] <0):
                 need[s[start]] +=1
                 start += 1
+            
             # Store min-start min-end everytime.
             if (minend==float(-inf) or (end-start) <= (minend-minstart)):
                 minstart,minend = start,end

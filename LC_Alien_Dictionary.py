@@ -112,3 +112,60 @@ class Solution(object):
                     return ""
         return "".join(reversed(Ans))
     
+
+
+
+import collections
+class Solution(object):
+    def alienOrder(self, words):
+        """
+        :type words: List[str]
+        :rtype: str
+        """
+        
+        ## Create a adjaceny list
+        adj = collections.defaultdict(set)
+        
+        # Create an entry for all the characters
+        for word in words:
+            for ch in word:
+                adj[ch] = set()
+        
+        ## Check for words that break the rule of length
+        for j in range(len(words)-1):
+            w1,w2 = words[j], words[j+1]
+            minLen = min(len(w1), len(w2))
+            if len(w1) > len(w2) and w1[:minLen] == w2[:minLen]:
+                return ""
+            
+            for j in range(minLen):
+                if w1[j] != w2[j]:
+                    adj[w1[j]].add(w2[j])
+                    break
+        
+        # We use the visited to keep track of two states.
+        # Visit with value true means it is in the path, false means we are done with it.
+        visit = dict()
+        ans = []
+        
+        # Perform post order travesal
+        def dfs(c):
+            if c in visit:
+                return visit[c]
+            
+            visit[c] = True
+            for nei in adj[c]:
+                # Detect loops
+                if dfs(nei):
+                    return True
+            visit[c] = False
+            ans.append(c)
+        
+        for ch in dict(adj):
+            # Check for loop
+            if dfs(ch):
+                return ""
+        return "".join(ans[::-1])
+                
+        
+    

@@ -25,3 +25,25 @@ class Solution:
             level = Child           
         return Ans
    
+class Solution:
+    def levelOrder(self, root):
+        res = []
+        # add it to a queue
+        q = collections.deque()
+        q.append(root)
+        while q:
+            # Visit level by level
+            qLen = len(q)
+            
+            # keep track of all items in the level
+            level = []
+            for i in range(qLen):
+                node = q.popleft()
+                if node:
+                    level.append(node.val)
+                    q.append(node.left)
+                    q.append(node.right)
+            if level:
+                # Add it to the answer
+                res.append(level)
+        return res

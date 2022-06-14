@@ -35,27 +35,24 @@ piles.length <= h <= 109
 idea 
 https://leetcode.com/discuss/study-guide/786126/python-powerful-ultimate-binary-search-template-solved-many-problems/1087827
 """
-class Solution(object):
-    def minEatingSpeed(self, piles, h):
-        """
-        :type piles: List[int]
-        :type h: int
-        :rtype: int
-        """
-        def feasible(speed):
-            hour = 0 
-            for pile in piles:
-                if pile % speed != 0:
-                    hour += 1
-                hour += pile//speed
-                if hour > h:
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        def is_k_fine(k):
+            total_time = 0
+            for item in piles:
+                hour = math.ceil(item/k)
+                total_time += hour
+                if (total_time > h):
                     return False
             return True
-        left, right = 1, max(piles)
-        while left < right:
-            mid = left + (right - left) // 2
-            if feasible(mid):
-                right = mid
+        
+        i = 1
+        j = max(piles)
+
+        while i < j:
+            mid = i + (j -i)//2
+            if (is_k_fine(mid)):
+                j = mid
             else:
-                left = mid+1
-        return left
+                i = mid+1
+        return j

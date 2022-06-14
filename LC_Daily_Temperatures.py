@@ -46,3 +46,23 @@ class Solution(object):
             Stack.append([temp,idx])
         return Ans
                 
+
+
+class Solution(object):
+    def dailyTemperatures(self, temperatures):
+        """
+        :type temperatures: List[int]
+        :rtype: List[int]
+        """
+        Ans = [0] * len(temperatures)
+        Stack = []
+        for idx,temp in enumerate(temperatures):
+            while(len(Stack)):
+                if (temp > Stack[-1][0]):
+                    Ans[Stack[-1][1]] = idx-Stack[-1][1]
+                    Stack.pop()
+                else:
+                    break;
+            Stack.append([temp,idx])
+        return Ans
+                
