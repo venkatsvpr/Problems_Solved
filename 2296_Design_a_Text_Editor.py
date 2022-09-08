@@ -93,10 +93,14 @@ class TextEditor:
             nxt_node.prev = self.cursor
         return i
     
-    def getTextLeft(self, curr, k):
-        if curr == None or k == 0 or curr.value == None:
-            return ""
-        return self.getTextLeft(curr.prev, k -1) + str(curr.value)
+    def getTextLeft(self, node, k):
+        i = 0
+        queue = collections.deque([])
+        while node.value and i < k:
+            queue.appendleft(node.value)
+            node = node.prev
+            i += 1
+        return "".join(queue)
     
     def cursorLeft(self, k: int) -> str:
         i = 0
@@ -105,7 +109,7 @@ class TextEditor:
             i += 1
         
         return self.getTextLeft(self.cursor, 10)
-
+        
     def cursorRight(self, k: int) -> str:
         i = 0
         while i < k and self.cursor.next:
